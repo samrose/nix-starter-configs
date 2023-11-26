@@ -69,10 +69,10 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 - Get the template:
 ```bash
 # For minimal version
-nix flake init -t github:misterio77/nix-starter-config#minimal
+nix flake init -t github:samrose/nix-starter-config#minimal
 
 # For standard version
-nix flake init -t github:misterio77/nix-starter-config#standard
+nix flake init -t github:samrose/nix-starter-config#standard
 ```
 - If you want to use NixOS: add stuff you currently have on `/etc/nixos/` to
   `nixos` (usually `configuration.nix` and `hardware-configuration.nix`, when
