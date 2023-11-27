@@ -9,9 +9,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs.url = "github:serokell/deploy-rs";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
@@ -24,7 +22,7 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
+    deploy-rs,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -57,7 +55,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       # FIXME replace with your hostname
-      your-hostname = nixpkgs.lib.nixosSystem {
+      example = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <
@@ -65,5 +63,11 @@
         ];
       };
     };
+    deploy.nodes.example.profiles.system = {
+      user = "root";
+      path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example;
+    };
+  };
+
   };
 }
