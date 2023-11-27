@@ -284,7 +284,19 @@ and you should be good to go. Files on `.gitignore`, of course, are invisible
 to nix - this is to guarantee your build won't depend on anything that is not
 on your repo.
 
-<!--
-# Learning resources
-TODO
--->
+#Usage
+
+
+`nix copy` is able to recreate the same path on the destination nixos machine.
+
+Therefore the following series of commands will build locally, copy to the remote nix store, and run the `switch-to-configuration` script from the nixos config closure copied over.
+
+```
+nix build .#nixosConfigurations.example.config.system.build.toplevel --refresh --out-link nomad
+
+nix copy --to ssh://user@host $(realpath example)
+
+ssh user@host "'$(realpath example)'/bin/switch-to-configuration switch"
+
+
+```

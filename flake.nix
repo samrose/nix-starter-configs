@@ -29,6 +29,12 @@
         '';
         path = ./standard;
       };
+      aws = {
+        description = ''
+          AWS flake - augmented with boilerplate for AWS-specific ec2 nixos.
+        '';
+        path = ./aws;
+      };
     };
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
