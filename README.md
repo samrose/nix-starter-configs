@@ -73,6 +73,9 @@ nix flake init -t github:samrose/nix-starter-config#minimal
 
 # For standard version
 nix flake init -t github:samrose/nix-starter-config#standard
+
+# For aws version
+nix flake init -t github:samrose/nix-starter-config#aws
 ```
 - If you want to use NixOS: add stuff you currently have on `/etc/nixos/` to
   `nixos` (usually `configuration.nix` and `hardware-configuration.nix`, when
@@ -292,11 +295,13 @@ on your repo.
 Therefore the following series of commands will build locally, copy to the remote nix store, and run the `switch-to-configuration` script from the nixos config closure copied over.
 
 ```
-nix build .#nixosConfigurations.example.config.system.build.toplevel --refresh --out-link nomad
+nix build .#nixosConfigurations.example.config.system.build.toplevel --refresh --out-link example
 
 nix copy --to ssh://user@host $(realpath example)
 
 ssh user@host "'$(realpath example)'/bin/switch-to-configuration switch"
 
+or
 
+nixos-rebuild switch --fast --flake .#example     --target-host user@host
 ```
