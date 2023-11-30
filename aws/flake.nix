@@ -74,6 +74,10 @@
       #propagatedPackages = with pkgs; [ google-chrome ];
       hooks = ''
         source .env
+        # # This is a shell hook that will be run when you enter the shell
+        # # You can use it to set environment variables, for example
+        # # the following is an example for setting up a phoenix framework project
+        # # with postgresql
         # mkdir -p .nix-mix .nix-hex
         # export MIX_HOME=$PWD/.nix-mix
         # export HEX_HOME=$PWD/.nix-mix
