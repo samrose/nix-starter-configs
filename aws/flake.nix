@@ -67,8 +67,7 @@
       user = "root";
       path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example;
     };
-  };
-      devShell = forAllSystems (system: let
+    devShell = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       mkShell = nixpkgs.legacyPackages.${system}.mkShell;
       basePackages = with pkgs; [alejandra unixtools.netstat];
@@ -110,4 +109,5 @@
         buildInputs = basePackages;
         propagatedBuildInputs = basePackages;
       });
-  }
+  };
+}
